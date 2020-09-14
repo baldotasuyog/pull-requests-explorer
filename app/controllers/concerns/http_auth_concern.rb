@@ -8,7 +8,7 @@ module HttpAuthConcern
   def http_authenticate
     return true unless Rails.env == 'production'
     authenticate_or_request_with_http_basic do |username, password|
-      username == 'simpleapp' && password == 'Prod#!23'
+      username == ENV['app_username'] && password == ENV['app_password']
     end
   end
 end
