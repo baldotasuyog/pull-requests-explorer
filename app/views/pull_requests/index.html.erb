@@ -1,0 +1,25 @@
+<div>
+  <table id="pr_table" class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Raised At</th>
+      <th scope="col">Assignee</th>
+      <th scope="col">Reviewers</th>
+      <th scope="col">Labels</th>
+    </tr>
+    </thead>
+
+    <tbody>
+      <% @pull_requests.each do |pr| %>
+        <tr>
+          <td><%= link_to pr['title'], pr['html_url'] %></td>
+          <td><%= time_ago_in_words(pr['created_at']) + " ago" %></td>
+          <td><%= pr['assignee']['login'] if pr['assignee'].present? %></td>
+          <td><%= get_pr_reviewers(pr) %></td>
+          <td><%= get_pr_labels(pr) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
